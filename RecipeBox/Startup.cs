@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ToDoList.Models;
+using RecipeBox.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace ToDoList
+namespace RecipeBox
 {
   public class Startup
   {
@@ -30,7 +30,7 @@ namespace ToDoList
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
         
       services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<ToDoListContext>()
+        .AddEntityFrameworkStores<RecipeBoxContext>()
         .AddDefaultTokenProviders();
 
       services.Configure<IdentityOptions>(options =>
@@ -63,7 +63,7 @@ namespace ToDoList
       
       app.Run(async (context) =>
       {
-        await context.Response.WriteAsync("Hello World!");
+        await context.Response.WriteAsync("Page not found!");
       });
     }
   }
