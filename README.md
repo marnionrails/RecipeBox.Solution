@@ -54,7 +54,7 @@ Example of complete appsettings.json:
 * Open MySql Workbench and login to your server.
 * Click on the Administration tab in the Navigator on the left side of the screen. (this tab will likely be on the bottom of the window)
 * In the management section of this administration tab click on the button called <code>Data Import/Export</code>. 
-* Once the data import window opens click on <code>Import from Self-Contained file</code> radio button, navigate into the project folder and select <code>marni_sucher.sql</code> using the file path next to that radio button.
+* Once the data import window opens click on <code>Import from Self-Contained file</code> radio button, navigate into the project folder and select <code>recipe_box.sql</code> using the file path next to that radio button.
 * Now click on the <code>New...</code> button in the section marked "Default Schema to be Imported To" directly underneath the import options section.
 * Click on the "Import Progress" tab at the top of the Data import window.
 * At the bottom of this tab click the button that reads <code>Start Import</code>.
