@@ -11,6 +11,9 @@ public class Recipe
 
         public int RecipeId { get; set; }
         public string Name { get; set; }
+
+        public int Rating { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public virtual ICollection<RecipeTag> JoinEntities { get; set; }
     }
 
