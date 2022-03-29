@@ -1,0 +1,76 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecipeBox.Models.Tag
+
+<h2>Tag Details</h2>
+<hr>
+<h3><strong>Name: </strong>@Html.DisplayFor(model => model.Name)</h3>
+<hr>
+<div class="row">
+  <div class="col">
+    @if (Model.JoinEntities.Count == 0)
+    {
+      <p>This tag does not contain any recipes.</p>
+    }
+    else
+    {
+      <h4><strong>Recipe:</strong> (@Model.JoinEntities.Count)</h4>
+      <ul>
+        @foreach (var join in Model.JoinEntities)
+        {
+          @using (Html.BeginForm("DeleteRecipe", "Tags"))
+          {
+            <p>
+              <!-- Modal Button Trigger -->
+              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Recipe_@(join.RecipeTagId)">
+                Delete
+              </button>
+              - @Html.ActionLink($"{join.Recipe.Name}", "Details", "Recipes", new {id = join.Recipe.RecipeId})
+            </p>
+
+            <!-- Modal -->
+            <div class="modal fade" id="Recipe_@(join.RecipeTagId)" tabindex="-1" aria-labelledby="RecipeLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="RecipeLabel_@(join.RecipeTagId)">Delete @join.Recipe.Name?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Clicking delete will remove this recipe from the tag. This action is final and you will need to re-add the recipe manually if you wish to have them associated again.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    @using (Html.BeginForm("DeleteRecipe", "Tags"))
+                    {
+                      @Html.Hidden("joinId", @join.RecipeTagId)
+                      <input type="submit" value="Delete"  class="btn btn-danger"/>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        }
+      </ul>
+    }
+
+
+    @using (Html.BeginForm("AddRecipe","Tags"))
+    {
+      @Html.HiddenFor(model => model.TagId)
+
+      @Html.Label("Add Recipe")
+      @Html.DropDownList("RecipeId", "Select Recipe")
+
+      <input type="submit" value="add" />
+    }
+
+    <hr>
+
+  </div>
+</div>
+<p>@Html.ActionLink("Edit Tag", "Edit", new { id = Model.TagId })</p>
+<p>@Html.ActionLink("Delete Tag", "Delete", new { id = Model.TagId})</p>
